@@ -1,6 +1,7 @@
 ---
 # tasks file for roles/config_backup
 - name: Backup of IOS Devices config
+  tags: [backup]
   become: yes
   ios_config:
    backup: yes
