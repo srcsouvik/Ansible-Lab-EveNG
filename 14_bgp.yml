@@ -10,7 +10,7 @@
         router_id: 192.0.2.1
         log_neighbor_changes: true
         neighbors:
-        - neighbor: 203.0.113.5
+        - neighbor: 1.2.3.4
           remote_as: 64511
         - neighbor: 198.51.100.2
           remote_as: 64498
