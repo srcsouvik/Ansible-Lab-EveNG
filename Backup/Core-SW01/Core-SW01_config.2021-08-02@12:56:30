@@ -1,0 +1,135 @@
+Building configuration...
+
+Current configuration : 1988 bytes
+!
+! Last configuration change at 13:54:27 EET Mon Aug 2 2021 by cisco
+!
+version 15.1
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname Core-SW01-Ansible
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+username cisco privilege 15 password 0 cisco123
+no aaa new-model
+clock timezone EET 2 0
+!
+ip cef
+!
+!
+no ip domain-lookup
+ip domain-name mylab.com
+no ipv6 cef
+ipv6 multicast rpf use-bgp
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+ip ssh version 2
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback11
+ description Sample Network Route Injection
+ ip address 172.25.0.1 255.255.255.0
+!
+interface Loopback12
+ description Sample Network Route Injection
+ ip address 172.25.1.1 255.255.255.0
+!
+interface Ethernet0/0
+ switchport access vlan 192
+ switchport mode access
+ duplex auto
+ spanning-tree portfast
+!
+interface Ethernet0/1
+ switchport access vlan 192
+ switchport mode access
+ duplex auto
+ spanning-tree portfast
+!
+interface Ethernet0/2
+ switchport access vlan 192
+ switchport mode access
+ duplex auto
+ spanning-tree portfast
+!
+interface Ethernet0/3
+ duplex auto
+!
+interface Ethernet1/0
+ switchport access vlan 12
+ switchport mode access
+ duplex auto
+!
+interface Ethernet1/1
+ switchport access vlan 32
+ switchport mode access
+ duplex auto
+!
+interface Ethernet1/2
+ duplex auto
+!
+interface Ethernet1/3
+ duplex auto
+!
+interface Vlan12
+ description L3 Link to RTR04
+ ip address 172.16.0.26 255.255.255.252
+!
+interface Vlan32
+ description L3 Link to RTR03
+ ip address 172.16.0.30 255.255.255.252
+!
+interface Vlan192
+ ip address 192.168.110.50 255.255.255.0
+!
+router ospf 1
+ router-id 5.5.5.5
+ network 5.5.5.5 0.0.0.0 area 0
+ network 172.16.0.0 0.0.0.255 area 0
+ network 172.25.0.0 0.0.1.255 area 0
+!
+!
+no ip http server
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login local
+ transport input all
+!
+end

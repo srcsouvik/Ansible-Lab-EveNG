@@ -1,0 +1,159 @@
+changed: false
+failed: false
+stdout:
+- "Building configuration...\n\nCurrent configuration : 1135 bytes\n!\n! Last configuration\
+    \ change at 11:40:16 EET Mon Aug 2 2021\n!\nversion 15.5\nservice timestamps debug\
+    \ datetime msec\nservice timestamps log datetime msec\nno service password-encryption\n\
+    !\nhostname RTR03\n!\nboot-start-marker\nboot-end-marker\n!\n!\n!\nno aaa new-model\n\
+    !\n!\n!\nbsd-client server url https://cloudsso.cisco.com/as/token.oauth2\nclock\
+    \ timezone EET 2 0\nmmi polling-interval 60\nno mmi auto-configure\nno mmi pvc\n\
+    mmi snmp-timeout 180\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n\n\n!\n!\n!\n!\n\
+    no ip domain lookup\nip domain name mylab.com\nip cef\nno ipv6 cef\n!\nmultilink\
+    \ bundle-name authenticated\n!\n!\n!\n!\n!\n!\n!\ncts logging verbose\n!\n!\n\
+    username cisco privilege 15 password 0 cisco123\n!\nredundancy\n!\n!\nip ssh version\
+    \ 2\n! \n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\ninterface Ethernet0/0\n ip address\
+    \ 192.168.110.53 255.255.255.0\n!\ninterface Ethernet0/1\n no ip address\n shutdown\n\
+    !\ninterface Ethernet0/2\n no ip address\n shutdown\n!\ninterface Ethernet0/3\n\
+    \ no ip address\n shutdown\n!\nip forward-protocol nd\n!\n!\nno ip http server\n\
+    no ip http secure-server\n!\n!\n!\n!\ncontrol-plane\n!\n!\n!\n!\n!\n!\n!\n!\n\
+    line con 0\n logging synchronous\nline aux 0\nline vty 0 4\n login local\n transport\
+    \ input all\n!\n!\nend"
+- "Interface                  IP-Address      OK? Method Status                Protocol\n\
+    Ethernet0/0                192.168.110.53  YES TFTP   up                    up\
+    \      \nEthernet0/1                unassigned      YES unset  administratively\
+    \ down down    \nEthernet0/2                unassigned      YES unset  administratively\
+    \ down down    \nEthernet0/3                unassigned      YES unset  administratively\
+    \ down down"
+stdout_lines:
+-   - Building configuration...
+    - ''
+    - 'Current configuration : 1135 bytes'
+    - '!'
+    - '! Last configuration change at 11:40:16 EET Mon Aug 2 2021'
+    - '!'
+    - version 15.5
+    - service timestamps debug datetime msec
+    - service timestamps log datetime msec
+    - no service password-encryption
+    - '!'
+    - hostname RTR03
+    - '!'
+    - boot-start-marker
+    - boot-end-marker
+    - '!'
+    - '!'
+    - '!'
+    - no aaa new-model
+    - '!'
+    - '!'
+    - '!'
+    - bsd-client server url https://cloudsso.cisco.com/as/token.oauth2
+    - clock timezone EET 2 0
+    - mmi polling-interval 60
+    - no mmi auto-configure
+    - no mmi pvc
+    - mmi snmp-timeout 180
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - ''
+    - ''
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - no ip domain lookup
+    - ip domain name mylab.com
+    - ip cef
+    - no ipv6 cef
+    - '!'
+    - multilink bundle-name authenticated
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - cts logging verbose
+    - '!'
+    - '!'
+    - username cisco privilege 15 password 0 cisco123
+    - '!'
+    - redundancy
+    - '!'
+    - '!'
+    - ip ssh version 2
+    - '! '
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - interface Ethernet0/0
+    - ' ip address 192.168.110.53 255.255.255.0'
+    - '!'
+    - interface Ethernet0/1
+    - ' no ip address'
+    - ' shutdown'
+    - '!'
+    - interface Ethernet0/2
+    - ' no ip address'
+    - ' shutdown'
+    - '!'
+    - interface Ethernet0/3
+    - ' no ip address'
+    - ' shutdown'
+    - '!'
+    - ip forward-protocol nd
+    - '!'
+    - '!'
+    - no ip http server
+    - no ip http secure-server
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - control-plane
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - '!'
+    - line con 0
+    - ' logging synchronous'
+    - line aux 0
+    - line vty 0 4
+    - ' login local'
+    - ' transport input all'
+    - '!'
+    - '!'
+    - end
+-   - Interface                  IP-Address      OK? Method Status                Protocol
+    - 'Ethernet0/0                192.168.110.53  YES TFTP   up                    up      '
+    - 'Ethernet0/1                unassigned      YES unset  administratively down
+        down    '
+    - 'Ethernet0/2                unassigned      YES unset  administratively down
+        down    '
+    - Ethernet0/3                unassigned      YES unset  administratively down
+        down

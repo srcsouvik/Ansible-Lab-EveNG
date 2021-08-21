@@ -7,7 +7,7 @@
     - redistribute bgp 65001 subnets
     - redistribute connected
     parents: router ospf 1
-  when: inventory_hostname=='RTR3' or inventory_hostname=='RTR4'
+  when: inventory_hostname=='R3' or inventory_hostname=='R4'
 - name: configure ospf to BGP redistribution
   tags: [Redis]
   cisco.ios.ios_bgp:
@@ -21,4 +21,4 @@
           id: "{{ ospf.process_id}}"
           metric: 10
     operation: merge
-  when: inventory_hostname=='RTR3' or inventory_hostname=='RTR4'  
+  when: inventory_hostname=='R3' or inventory_hostname=='R4'  

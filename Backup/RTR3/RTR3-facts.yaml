@@ -1,0 +1,98 @@
+ansible_facts:
+    ansible_net_all_ipv4_addresses:
+    - 192.168.110.53
+    ansible_net_all_ipv6_addresses: []
+    ansible_net_api: cliconf
+    ansible_net_config: "!\n! Last configuration change at 11:40:16 EET Mon Aug 2\
+        \ 2021\n!\nversion 15.5\nservice timestamps debug datetime msec\nservice timestamps\
+        \ log datetime msec\nno service password-encryption\n!\nhostname RTR03\n!\n\
+        boot-start-marker\nboot-end-marker\n!\n!\n!\nno aaa new-model\n!\n!\n!\nbsd-client\
+        \ server url https://cloudsso.cisco.com/as/token.oauth2\nclock timezone EET\
+        \ 2 0\nmmi polling-interval 60\nno mmi auto-configure\nno mmi pvc\nmmi snmp-timeout\
+        \ 180\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n\n\n!\n!\n!\n!\nno ip domain\
+        \ lookup\nip domain name mylab.com\nip cef\nno ipv6 cef\n!\nmultilink bundle-name\
+        \ authenticated\n!\n!\n!\n!\n!\n!\n!\ncts logging verbose\n!\n!\nusername\
+        \ cisco privilege 15 password 0 cisco123\n!\nredundancy\n!\n!\nip ssh version\
+        \ 2\n! \n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\ninterface Ethernet0/0\n ip address\
+        \ 192.168.110.53 255.255.255.0\n!\ninterface Ethernet0/1\n no ip address\n\
+        \ shutdown\n!\ninterface Ethernet0/2\n no ip address\n shutdown\n!\ninterface\
+        \ Ethernet0/3\n no ip address\n shutdown\n!\nip forward-protocol nd\n!\n!\n\
+        no ip http server\nno ip http secure-server\n!\n!\n!\n!\ncontrol-plane\n!\n\
+        !\n!\n!\n!\n!\n!\n!\nline con 0\n logging synchronous\nline aux 0\nline vty\
+        \ 0 4\n login local\n transport input all\n!\n!\nend"
+    ansible_net_filesystems:
+    - 'system:'
+    ansible_net_filesystems_info:
+        'system:': {}
+    ansible_net_gather_network_resources: []
+    ansible_net_gather_subset:
+    - config
+    - hardware
+    - default
+    - interfaces
+    ansible_net_hostname: RTR03
+    ansible_net_image: unix:/opt/unetlab/addons/iol/bin/i86bi-linux-l3-adventerprisek9-15.5
+    ansible_net_interfaces:
+        Ethernet0/0:
+            bandwidth: 10000
+            description: null
+            duplex: null
+            ipv4:
+            -   address: 192.168.110.53
+                subnet: '24'
+            lineprotocol: up
+            macaddress: aabb.cc00.3000
+            mediatype: null
+            mtu: 1500
+            operstatus: up
+            type: AmdP2
+        Ethernet0/1:
+            bandwidth: 10000
+            description: null
+            duplex: null
+            ipv4: []
+            lineprotocol: down
+            macaddress: aabb.cc00.3010
+            mediatype: null
+            mtu: 1500
+            operstatus: administratively down
+            type: AmdP2
+        Ethernet0/2:
+            bandwidth: 10000
+            description: null
+            duplex: null
+            ipv4: []
+            lineprotocol: down
+            macaddress: aabb.cc00.3020
+            mediatype: null
+            mtu: 1500
+            operstatus: administratively down
+            type: AmdP2
+        Ethernet0/3:
+            bandwidth: 10000
+            description: null
+            duplex: null
+            ipv4: []
+            lineprotocol: down
+            macaddress: aabb.cc00.3030
+            mediatype: null
+            mtu: 1500
+            operstatus: administratively down
+            type: AmdP2
+    ansible_net_iostype: IOS
+    ansible_net_memfree_mb: 808509.65234375
+    ansible_net_memtotal_mb: 874020.72265625
+    ansible_net_neighbors:
+        Ethernet0/0:
+        -   host: Core-SW.mylab.com
+            port: GigabitEthernet1/1
+    ansible_net_python_version: 3.6.9
+    ansible_net_serialnum: '67108912'
+    ansible_net_system: ios
+    ansible_net_version: 15.5(2)T
+    ansible_network_resources: {}
+changed: false
+failed: false
+warnings:
+- default value for `gather_subset` will be changed to `min` from `!config` v2.11
+    onwards

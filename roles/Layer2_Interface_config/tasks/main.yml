@@ -20,7 +20,7 @@
       enabled: true
 - name: Configure L2-vlan on Switch
   tags: [L2]
-  when: inventory_hostname=='Core-SW1' 
+  when: inventory_hostname=='Core-SW01' or inventory_hostname=='Core-SW02' 
   loop: "{{ L2_vlan }}"
   cisco.ios.ios_vlans:
     config:
@@ -30,19 +30,15 @@
       shutdown: disabled
     state: merged
 
-- name: Configure vlan to Switchport interfaces
+- name: Configure vlan to Switchport interfaces on Core SW 01
   tags: [L2]
-  when: inventory_hostname=='Core-SW1'
+  when: inventory_hostname=='Core-SW01'
   cisco.ios.ios_l2_interfaces:
     config:
-    - name: GigabitEthernet0/3
+    - name: e1/1
       mode: access
       access:
         vlan: 32
-    - name: GigabitEthernet1/0
-      mode: access
-      access:
-        vlan: 12
  #   - name: GigabitEthernet1/0
 #      mode: trunk
 #      trunk:
@@ -50,4 +46,14 @@
 #        native_vlan: 20
 #        pruning_vlans: 10,20
 #        encapsulation: dot1q
+    state: merged
+- name: Configure vlan to Switchport interfaces on Core SW 02
+  tags: [L2]
+  when: inventory_hostname=='Core-SW02'
+  cisco.ios.ios_l2_interfaces:
+    config:
+    - name: e1/1
+      mode: access
+      access:
+        vlan: 12
     state: merged
