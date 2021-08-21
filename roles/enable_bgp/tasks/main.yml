@@ -2,7 +2,7 @@
 # tasks file for roles/enable_bgp
 - name: Enable BGP and Neighbor
   tags: [BGP]
-  when: inventory_hostname=='RTR1' or inventory_hostname=='RTR2' or inventory_hostname=='RTR3' or inventory_hostname=='RTR4'
+  when: inventory_hostname=='R1' or inventory_hostname=='R2' or inventory_hostname=='R3' or inventory_hostname=='R4'
   loop: "{{ neighbor }}"
   cisco.ios.ios_bgp:
     config:
@@ -15,7 +15,7 @@
     operation: merge
 - name: Advertise Networks
   tags: [BGP]
-  when: inventory_hostname=='RTR1' or inventory_hostname=='RTR2' 
+  when: inventory_hostname=='R1' or inventory_hostname=='R2' 
   loop: "{{ networks }}"
   cisco.ios.ios_bgp:
     config:

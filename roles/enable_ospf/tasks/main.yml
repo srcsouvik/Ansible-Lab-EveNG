@@ -11,7 +11,7 @@
 
 - name: OSPF V2 configuration
   tags: [OSPF]
-  when: inventory_hostname=='RTR3' or inventory_hostname=='RTR4' or inventory_hostname=='Core-SW1'
+  when: inventory_hostname=='R3' or inventory_hostname=='R4' or inventory_hostname=='Core-SW02' or inventory_hostname=='Core-SW01'
   loop: "{{ ospf_networks }}"
   cisco.ios.ios_ospfv2:
     config:
