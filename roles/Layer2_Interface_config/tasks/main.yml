@@ -10,14 +10,14 @@
       enabled: true
 #      speed: 100
  #     duplex: half
-- name: Enable Loopback Interface description
-  tags: [L2]
-  loop: "{{ local_loopbacks }}"
-  ios_interfaces:
-   config:
-    - name: "{{ item.name }}"
-      description: "{{ item.desc }}"
-      enabled: true
+#- name: Enable Loopback Interface description
+#  tags: [L2]
+#  loop: "{{ local_loopbacks }}"
+#  ios_interfaces:
+#   config:
+#    - name: "{{ item.name }}"
+#      description: "{{ item.desc }}"
+#      enabled: true
 - name: Configure L2-vlan on Switch
   tags: [L2]
   when: inventory_hostname=='Core-SW01' or inventory_hostname=='Core-SW02' 
@@ -39,13 +39,6 @@
       mode: access
       access:
         vlan: 32
- #   - name: GigabitEthernet1/0
-#      mode: trunk
-#      trunk:
-#        allowed_vlans: 10-20,40
-#        native_vlan: 20
-#        pruning_vlans: 10,20
-#        encapsulation: dot1q
     state: merged
 - name: Configure vlan to Switchport interfaces on Core SW 02
   tags: [L2]
@@ -56,4 +49,25 @@
       mode: access
       access:
         vlan: 12
+    state: merged
+- name: Configure port-channel on core switches
+  tags: [L2]
+  when: inventory_hostname=='Core-SW01' or inventory_hostname=='Core-SW02'
+  cisco.ios.ios_config:
+    lines:
+    - interface range eth0/3, eth1/3
+    - desc port-channel to core switch
+    - channel-group 10 mode active
+#    parents: interface Ethernet0/3
+- name: Configure Trunk on all port-channel 
+  tags: [L2]
+  when: inventory_hostname=='Core-SW01' or inventory_hostname=='Core-SW02'
+  loop: "{{ l2_fabric.interface }}"
+  cisco.ios.ios_l2_interfaces:
+    config:
+    - name: "{{ item.name }}"
+      mode: trunk
+      trunk:
+        allowed_vlans: 10-100
+        encapsulation: dot1q
     state: merged
