@@ -1,0 +1,172 @@
+Building configuration...
+
+Current configuration : 2352 bytes
+!
+! Last configuration change at 14:00:57 EET Sun Aug 22 2021 by cisco
+!
+version 15.5
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R4-Ansible
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+bsd-client server url https://cloudsso.cisco.com/as/token.oauth2
+clock timezone EET 2 0
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip domain name mylab.com
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+cts logging verbose
+!
+!
+username cisco privilege 15 password 0 cisco123
+!
+redundancy
+!
+!
+ip ssh version 2
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback11
+ ip address 172.24.0.1 255.255.255.0
+!
+interface Loopback12
+ ip address 172.24.1.1 255.255.255.0
+!
+interface Ethernet0/0
+ ip address 192.168.110.54 255.255.255.0
+!
+interface Ethernet0/1
+ description L3 Link to RTR01
+ ip address 172.16.0.18 255.255.255.252
+!
+interface Ethernet0/2
+ description L3 Link to Core-SW1
+ ip address 172.16.0.25 255.255.255.252
+!
+interface Ethernet0/3
+ description L3 Link to RTR03
+ ip address 172.16.0.22 255.255.255.252
+!
+interface Ethernet1/0
+ description L3 Link to RTR02
+ ip address 172.16.0.6 255.255.255.252
+!
+interface Ethernet1/1
+ no ip address
+ shutdown
+!
+interface Ethernet1/2
+ no ip address
+ shutdown
+!
+interface Ethernet1/3
+ no ip address
+ shutdown
+!
+router ospf 1
+ router-id 4.4.4.4
+ redistribute connected subnets
+ redistribute bgp 65001 subnets
+ network 4.4.4.4 0.0.0.0 area 0
+ network 172.16.0.4 0.0.0.3 area 0
+ network 172.16.0.16 0.0.0.3 area 0
+ network 172.16.0.20 0.0.0.3 area 0
+ network 172.16.0.24 0.0.0.3 area 0
+ network 172.24.0.0 0.0.1.255 area 0
+!
+router bgp 65001
+ bgp router-id 192.168.4.4
+ bgp log-neighbor-changes
+ neighbor 172.16.0.5 remote-as 65000
+ neighbor 172.16.0.17 remote-as 65000
+ neighbor 172.16.0.21 remote-as 65001
+ !
+ address-family ipv4
+  redistribute ospf 1 metric 10
+  neighbor 172.16.0.5 activate
+  neighbor 172.16.0.17 activate
+  neighbor 172.16.0.21 activate
+ exit-address-family
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login local
+ transport input all
+!
+ntp server pnpntpserver.localdomain
+!
+end

@@ -1,18 +1,27 @@
 ---
-local_loopbacks:
-    - name: Loopback11
-      desc: Sample Network Route Injection
-      ip_address: 172.25.0.2/24
-#      prefix: 24
-    - name: Loopback12
-      desc: Sample Network Route Injection
-      ip_address: 172.25.1.2/24
-#      prefix: 24
 L2_vlan:
  - name: Vlan_32
    vlan_id: 32
  - name: Vlan_12
    vlan_id: 12
+ - name: Vlan_30
+   vlan_id: 30
+ - name: Vlan_31
+   vlan_id: 31
+l2_fabric:
+  interface:
+    - name: eth0/3
+      desc: link to core sw01
+    - name: eth1/3
+      desc: link to core sw01
+    - name: eth1/0
+      desc: link to access sw05
+    - name: eth1/2
+      desc: link to access sw05
+    - name: Port-channel10
+      desc: LAG to core sw01
+    - name: Port-channel20
+      desc: LAG to access sw05 
 l3_fabric:
   interfaces:
     #- name: vlan32
@@ -22,13 +31,18 @@ l3_fabric:
     - name: vlan12
       desc: L3 Link to RTR04
       ip_address: 172.16.0.26/30
-      # prefix: 30
+    - name: vlan30
+      desc: Sample Network Route Injection
+      ip_address: 172.30.0.2/24
+    - name: vlan31
+      desc: Sample Network Route Injection
+      ip_address: 172.30.1.2/24
 ospf_router_id: 6.6.6.6
 ospf_networks:
     - network: 172.16.0.0
       mask: 0.0.0.255
       area: 0
-    - network: 172.25.0.0
+    - network: 172.30.0.0
       mask: 0.0.1.255
       area: 0
     - network: 6.6.6.6
