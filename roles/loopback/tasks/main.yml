@@ -3,6 +3,7 @@
 ---
 - name: Configuring Loopback Interfaces
   tags: [loop]
+  when: inventory_hostname=='R1' or inventory_hostname=='R2' or inventory_hostname=='R3' or inventory_hostname=='R4'
   loop: "{{ local_loopbacks }}"
   ios_l3_interface:
    name: "{{ item.name }}"

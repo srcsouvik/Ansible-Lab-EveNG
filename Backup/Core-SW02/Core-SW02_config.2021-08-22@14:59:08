@@ -1,8 +1,8 @@
 Building configuration...
 
-Current configuration : 1989 bytes
+Current configuration : 2407 bytes
 !
-! Last configuration change at 13:25:07 EET Sat Aug 21 2021 by cisco
+! Last configuration change at 15:57:38 EET Sun Aug 22 2021 by cisco
 !
 version 15.1
 service timestamps debug datetime msec
@@ -10,7 +10,7 @@ service timestamps log datetime msec
 no service password-encryption
 service compress-config
 !
-hostname Core-SW01-Ansible
+hostname Core-SW02-Ansible
 !
 boot-start-marker
 boot-end-marker
@@ -53,19 +53,17 @@ ip ssh version 2
 !
 !
 !
-interface Loopback11
- description Sample Network Route Injection
- ip address 172.25.0.1 255.255.255.0
+interface Port-channel20
+ no ip address
 !
-interface Loopback12
- description Sample Network Route Injection
- ip address 172.25.1.1 255.255.255.0
+interface Port-channel10
+ switchport
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 10-100
+ switchport mode trunk
 !
 interface Ethernet0/0
- switchport access vlan 192
- switchport mode access
  duplex auto
- spanning-tree portfast
 !
 interface Ethernet0/1
  switchport access vlan 192
@@ -74,46 +72,61 @@ interface Ethernet0/1
  spanning-tree portfast
 !
 interface Ethernet0/2
- switchport access vlan 192
- switchport mode access
  duplex auto
- spanning-tree portfast
 !
 interface Ethernet0/3
+ description port-channel to core switch
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 10-100
+ switchport mode trunk
  duplex auto
+ channel-group 10 mode active
 !
 interface Ethernet1/0
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 10-100
+ switchport mode trunk
+ duplex auto
+!
+interface Ethernet1/1
  switchport access vlan 12
  switchport mode access
  duplex auto
 !
-interface Ethernet1/1
- switchport access vlan 32
- switchport mode access
- duplex auto
-!
 interface Ethernet1/2
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 10-100
+ switchport mode trunk
  duplex auto
 !
 interface Ethernet1/3
+ description port-channel to core switch
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 10-100
+ switchport mode trunk
  duplex auto
+ channel-group 10 mode active
 !
 interface Vlan12
  description L3 Link to RTR04
  ip address 172.16.0.26 255.255.255.252
 !
-interface Vlan32
- description L3 Link to RTR03
- ip address 172.16.0.30 255.255.255.252
+interface Vlan30
+ description Sample Network Route Injection
+ ip address 172.30.0.2 255.255.255.0
+!
+interface Vlan31
+ description Sample Network Route Injection
+ ip address 172.30.1.2 255.255.255.0
 !
 interface Vlan192
- ip address 192.168.110.50 255.255.255.0
+ ip address 192.168.110.55 255.255.255.0
 !
 router ospf 1
- router-id 5.5.5.5
- network 5.5.5.5 0.0.0.0 area 0
+ router-id 6.6.6.6
+ network 6.6.6.6 0.0.0.0 area 0
  network 172.16.0.0 0.0.0.255 area 0
- network 172.25.0.0 0.0.1.255 area 0
+ network 172.30.0.0 0.0.1.255 area 0
 !
 !
 no ip http server
