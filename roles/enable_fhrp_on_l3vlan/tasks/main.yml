@@ -1,0 +1,13 @@
+---
+# tasks file for roles/enable_l3vlan
+ - name: Save generated configuration
+   tags: [fhrp]
+   when: inventory_hostname== 'Core-SW01' or inventory_hostname== 'Core-SW02'
+   template:
+    src: "templates/fhrp.j2"
+    dest: "templates/{{ inventory_hostname}}.conf"
+ - name: Configure HSRP/VRRP
+   tags: [fhrp]
+   when: inventory_hostname== 'Core-SW01' or inventory_hostname== 'Core-SW02'
+   ios_config:
+    src: "templates/fhrp.j2"

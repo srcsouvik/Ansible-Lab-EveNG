@@ -13,10 +13,14 @@ R4 ansible_host=192.168.110.54 ansible_python_interpreter="/usr/bin/env python"
 Core-SW01 ansible_host=192.168.110.50 ansible_python_interpreter="/usr/bin/env python"
 Core-SW02 ansible_host=192.168.110.55 ansible_python_interpreter="/usr/bin/env python"
 
+[Access]
+Access-SW03 ansible_host=192.168.110.60 ansible_python_interpreter="/usr/bin/env python"
+
 [Lab2:children]
 PE
 CE
 Core
+Access
 
 [Lab2:vars]
 ansible_connection=network_cli
