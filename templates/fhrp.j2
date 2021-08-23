@@ -1,0 +1,26 @@
+{% for vlan in L2_vlan %}
+vlan {{ vlan.vlan_id }}
+  name {{ vlan.name }}
+{% if vlan.l3 is defined %}
+interface vlan{{ vlan.id }}
+  ip address {{ vlan.ip_address | ipaddr('address') }} {{ vlan.ip_address | ipaddr('netmask') }}
+  no shutdown
+{% if vlan.hsrp is defined %}
+  standby {{ vlan.vlan_id }} ip {{ vlan.standby_ip }}
+  standby {{ vlan.vlan_id }} priority {{ vlan.priority }}
+  standby 10 preempt
+{% if vlan.track is defined %}
+  standby {{ vlan.id }} track {{ vlan.track.number }} decrement {{ vlan.track.decrement }}
+{% else %}
+{% endif %}
+{% endif %}
+{% if vlan.vrrp is defined %}
+  vrrp {{ vlan.id }} ip {{ vlan.standby_ip }}
+  vrrp {{ vlan.id }} priority {{ vlan.priority }}
+{% if vlan.track is defined %}
+  vrrp {{ vlan.id }} track {{ vlan.track.number }} decrement {{ vlan.track.decrement }}
+{% else %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
