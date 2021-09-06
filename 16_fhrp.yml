@@ -12,6 +12,6 @@
     - name: Configure HSRP/VRRP
       ios_config:
         src: "templates/fhrp.j2"
-    - name: save running to startup when modified
-      cisco.ios.ios_config:
-        save_when: modified
+#    - name: save running to startup when modified
+#      cisco.ios.ios_config:
+#        save_when: modified

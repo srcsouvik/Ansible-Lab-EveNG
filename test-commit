@@ -1,3 +1,7 @@
 git add .
 git commit -m "message"
 git push
+
+
+git checkout -b "branch name"   //to create new branch
+git branch -a                   // list all available branches

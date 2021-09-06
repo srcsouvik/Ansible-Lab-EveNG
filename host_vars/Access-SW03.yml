@@ -1,0 +1,37 @@
+---
+L2_vlan:
+ - name: Vlan_30
+   vlan_id: 30
+   desc: server_vlan
+ - name: Vlan_31
+   vlan_id: 31
+   desc: user_vlan
+l2_fabric:
+  interface:
+    - name: eth1/0
+      desc: link to core sw01
+      mode: trunk
+    - name: eth1/2
+      desc: link to core sw01
+      mode: trunk
+    - name: eth0/0
+      desc: link to core sw02
+      mode: trunk
+    - name: eth0/2
+      desc: link to core sw02
+      mode: trunk
+    - name: Port-channel10
+      desc: LAG to core sw01
+      mode: trunk
+    - name: Port-channel20
+      desc: LAG to core sw02
+      mode: trunk
+access_ports:
+    - name: eth1/3
+      vlan: 31
+      desc: user-port
+      mode: access
+    - name: eth0/3
+      vlan: 30
+      desc: server-A
+      mode: access

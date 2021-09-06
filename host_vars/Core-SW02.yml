@@ -8,6 +8,7 @@ L2_vlan:
    l3: true
  - name: Vlan_30
    vlan_id: 30
+   desc: server_vlan
    ip_address: 172.30.0.2/24
    standby_ip: 172.30.0.3
    priority: 110
@@ -15,6 +16,7 @@ L2_vlan:
    hsrp: True
  - name: Vlan_31
    vlan_id: 31
+   desc: user_vlan
    ip_address: 172.30.1.2/24
    standby_ip: 172.30.1.3
    priority: 110
@@ -33,13 +35,14 @@ l2_fabric:
     - name: Port-channel10
       desc: LAG to core sw01
     - name: Port-channel20
-      desc: LAG to access sw05 
+      desc: LAG to access sw05
+access_ports:
+    - name: eth1/1
+      vlan: 12
+      desc: transit-vlan
+      mode: access
 l3_fabric:
   interfaces:
-    #- name: vlan32
-    #  desc: L3 Link to RTR03
-    #  ip_address: 172.16.0.30/30
-     # prefix: 30
     - name: vlan12
       desc: L3 Link to RTR04
       ip_address: 172.16.0.26/30
