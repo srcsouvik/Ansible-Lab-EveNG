@@ -1,0 +1,30 @@
+---
+# tasks file for enable_bfd
+- name: Enable BFD on BGP neighbors
+  tags: [BFD]
+  when: inventory_hostname=='R1' or inventory_hostname=='R2' or inventory_hostname=='R3' or inventory_hostname=='R4'
+  loop: "{{ neighbor }}"
+  cisco.ios.ios_bgp_global:
+    config:
+      as_number: "{{ as_number }}"
+      neighbor: 
+        - address: "{{ item.address }}"
+          fall_over:
+            bfd:
+              set: true
+    state: merged
+- name: Enable BFD on physical interfaces 
+  tags: [BFD]
+  when: inventory_hostname=='R1' or inventory_hostname=='R2' or inventory_hostname=='R3' or inventory_hostname=='R4'
+  #loop: "{{ l3_fabric.interfaces }}"
+  cisco.ios.ios_config:
+    lines:
+    - bfd interval 50 min_rx 50 multiplier 5
+    parents: "{{ item }}"
+  with_items: 
+  - interface E0/1
+  - interface E0/2
+  - interface E0/3
+  - interface E1/0
+  - interface E1/2
+  - interface E1/3
