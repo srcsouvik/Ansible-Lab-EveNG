@@ -1,0 +1,78 @@
+---
+# Ansible Playbook to upgrade Cisco IOS 
+
+- name: Upgrade CSR1000v IOSXE
+  hosts: CSR
+
+  vars: 
+    upgrade_ios_version: 17.03.04a
+
+  tasks:
+    - name: CHECK CURRENT VERSION
+      ios_facts:
+
+    - debug: 
+        msg: 
+        - "Current version is {{ ansible_net_version }}"
+        - "Upgrade image is 17.03.04a"
+
+    - debug: 
+        msg: 
+        - "Image is not compliant and will be upgraded"
+      when: ansible_net_version != upgrade_ios_version
+
+    - name: Copy Image // This could take up to 4 minutes
+      net_put: 
+         src: "images/csr1000v-universalk9.17.03.04a.SPA.bin"
+         dest: "flash:/csr1000v-universalk9.17.03.04a.SPA.bin"
+      vars: 
+         ansible_command_timeout: 600
+         ansible_network_os: ios
+# Change the Boot Variable to the new image 
+
+    - name: Change Boot Variable to new image 
+      ios_config: 
+       commands: 
+         - "boot system bootflash:csr1000v-universalk9.17.03.04a.SPA.bin"
+       save_when: always 
+
+## Reload the device 
+
+    - name: Reload the Device 
+      cli_command: 
+       command: reload
+       prompt: 
+         - confirm
+       answer: 
+         - 'y'
+      when: ansible_net_version != upgrade_ios_version
+         
+## Wait for Reachability to the device 
+
+    - name: Wait for device to come back online
+      when: ansible_net_version != upgrade_ios_version
+      wait_for:
+       host: "{{ inventory_hostname }}"
+       port: 22
+       delay: 300
+      delegate_to: localhost
+      
+
+## Check current image 
+
+    - name: Check Image Version      
+      ios_facts:
+
+    - debug: 
+       msg: 
+       - "Current version is {{ ansible_net_version }}"
+
+    - name: ASSERT THAT THE IOS VERSION IS CORRECT
+      vars: 
+       upgrade_ios_version: 17.03.04a
+      assert:
+       that:
+         - upgrade_ios_version == ansible_net_version
+    - debug: 
+       msg: 
+       - "Software Upgrade has been completed"
